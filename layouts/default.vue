@@ -2,8 +2,12 @@
 <template>
     <div>
         <navbar/>
-        <Nuxt/>
-        esto es footer
+      
+      <div class="container-fluid">
+  <Nuxt/>
+
+
+      </div>
     </div>
 </template>
 <script>
