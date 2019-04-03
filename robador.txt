@@ -1,0 +1,23 @@
+      columns:[
+        {
+             field: 'id',
+             label: 'ID',
+             width:'40',
+},
+{
+             field: 'imagen',
+             labe: 'Imagen'
+},
+{
+             field: 'nombre',
+             labe: 'Nombre'
+},
+{
+             field: 'precio',
+             labe: 'Precio'
+},
+{
+             field: 'cantidad',
+             labe: 'cantidad'
+}
+      ]
