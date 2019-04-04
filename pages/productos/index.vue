@@ -9,7 +9,7 @@
           <div>
 
   
-    <b-table striped hover :items="data"></b-table>
+    <b-table responsive striped hover :fields="fiels" :items="productos"></b-table>
   
 
 
@@ -18,19 +18,24 @@
 </template>
 
 <script>
-export default {
-  data(){
-return{
-  data:[
-    {
-'id':'1', 'nombre':'conejo', 'precio':'20.000', 'cantidad':'45',
-    }
-  ]
-}
+import { db } from '../../services/firebase'
+ export default{
 
-  }
-
-}
-</script>
-
-
+   asyncData(){
+      db.collection("productos").get().then((productosSnap)=>{
+          let productos= []
+          productosSnap.forEach((value)=>{
+            productos.push(value.data)
+          })
+          return{
+            productos
+          }
+      })
+   },
+   data(){
+     return{
+     fields:['imagen','nombre','precio','cantidad','acciones']
+      }
+   },
+ }
+</script
