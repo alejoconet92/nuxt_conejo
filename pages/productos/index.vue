@@ -11,7 +11,11 @@
     <div class="overflow-auto">
       <b-table responsive striped hover :fields="fields" :items="productos" id="lista_productos" :per-page="perPage" :current-page="currentPage">
 
- 
+ <template slot="accioness">
+  <b-button variant="success">editar</b-button>
+<b-button variant="danger">eliminar</b-button>
+
+ </template>
       </b-table>
  <b-pagination
       v-model="currentPage"
@@ -49,7 +53,7 @@ export default {
   },
   data() {
     return {
-      fields: ["imagen", "nombre", "precio", "cantidad", "acciones"]
+      fields: ["imagen", "nombre", "precio", "cantidad", "accioness"]
     }
   },
   computed:{
