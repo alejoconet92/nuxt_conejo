@@ -1,62 +1,54 @@
 <template>
   <div class="container">
-    <h1>NUEVO PRODUCTO</h1>
-    <b-form @submit.prevent="guardarProducto" >
-      <b-form-group>
-        <label for="imagen">inserte imagen</label>
-        <b-form-file  accept=".jpg, .png"
-          placeholder="inserte imagen"
-          name="imagen"
-          id="imagen"
-    
-        ></b-form-file>
 
-        <label for="nombre">nombre</label>
-        <b-form-input id="nombre" v-model="form.nombre" required placeholder="ingresae nombre"></b-form-input>
+    <h1>Agregar producto nuevo</h1>
 
-        <label for="precio">precio</label>
-        <b-form-input  v-model="form.precio" id="precio" type="number" required placeholder="pesos colombia"></b-form-input>
+    <b-form id="product" @submit.prevent="guardarProducto"><!--submit es un evento que recarga página-->
 
-        <label for="precio">cantidad</label>
-        <b-form-input v-model="form.cantidad" id="cantidad" type="number" required placeholder="cuantos quiere"></b-form-input>
+      <b-form-group id="items">
+        <label for="imagen">Imagen</label>
+        <b-form-file v-model="file" accept=".jpg, .png, .jpeg" placeholder="Inserte imagen" name="imagen" id="imagen"></b-form-file>
+
+        <label for="nombre">Nombre</label>
+        <b-form-input id="nombre" type="text"  v-model="form.nombre" required placeholder="Ingrese nombre"></b-form-input>
+
+        <label for="precio">Precio</label>
+        <b-form-input id="precio" type="number" v-model="form.precio" required placeholder="Ingrese valor en pesos"></b-form-input>
+
+        <label for="cantidad">Cantidad</label>
+        <b-form-input id="cantidad" type="number" v-model="form.cantidad" required placeholder="Ingrese cantidad existente"></b-form-input>
       </b-form-group>
 
-      <b-button  variant="primary"  type="submit" :disabled="guardando">guardar</b-button>
-      <b-button type="botton" variant="dark">limpiar venta</b-button>
-
-      <div id="guardando" v-if="guardando" class="spinner-border text-info"></div>
+      <b-button variant="primary" type="submit" :disabled="guardando">Guardar</b-button>
+      <b-button type="submit" variant="danger">Limpiar</b-button> 
     </b-form>
-
-
+    <b-spinner  v-if="guardando" type = "grow"  label = "Cargando ..." > </b-spinner > 
   </div>
 </template>
+
 <script>
-import{ db } from '../../services/firebase'
-
-export default {
-  data(){
-    return{
-      form:{
-      nombre:'',
-      precio:'',
-      cantidad:''
+  import { db } from '../../services/firebase'
+    export default{
+      data(){
+        return{
+          form: {
+            nombre: '',
+            cantidad: '',
+            precio: ''
+          },
+          guardando:false,
+          
+        }
       },
-      guardando: false,
+      methods: {
+        guardarProducto(){
+          this.guardando=true
+          db.collection("productos").add(this.form).then(res =>{//.then permite que se ejecute
+            this.$router.push({//PAra volver a productos
+              path: "/productos"
+            })
+          }) //add recibe un objeto de lo que vamos a agregar
+        }
+      }
     }
-
-  },
-  methods: {
-    guardarProducto(){
-      this.guardando= true
-db.collection("productos").add(this.form).then(res =>{
-this.$router.push({
-  path: "/productos"
-})
-
-})
-
-    }
-  }
-};
 </script>
-

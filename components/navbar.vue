@@ -6,7 +6,7 @@
 
   </div-->
   <b-navbar variant="danger" type="dark" toggleable="lg">
-    <b-navbar-brand href="/">bootstrac</b-navbar-brand>
+    <b-navbar-brand href="/">Soluciones Wi-Fi</b-navbar-brand>
     <b-collapse>
       <!-- para que la barra se agrande -->
     </b-collapse>
